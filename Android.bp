@@ -6,7 +6,8 @@ android_library {
         enabled: false,
     },
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java",
+    "src/**/*.kt"],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
@@ -16,7 +17,10 @@ android_library {
         "androidx.preference_preference",
         "androidx.appcompat_appcompat",
         "androidx.recyclerview_recyclerview",
-        "androidx.viewpager_viewpager"
+        "androidx.viewpager_viewpager",
+        "androidx.palette_palette",
+        "kotlinx-coroutines-android",
+        "kotlinx-coroutines-core"
     ],
 
     resource_dirs: ["res"],
