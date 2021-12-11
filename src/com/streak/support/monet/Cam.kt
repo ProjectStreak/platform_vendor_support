@@ -20,6 +20,11 @@ public class Cam constructor(
         return sqrt(dJ * dJ + dA * dA + dB * dB).pow(0.63) * 1.41
     }
 
+    @JvmName("getSenderName")
+    public fun getChroma(): Double {
+        return chroma;
+    }
+
     public fun viewedInSrgb(): Int {
         return viewed(Frame.DEFAULT)
     }

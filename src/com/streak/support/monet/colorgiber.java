@@ -17,43 +17,23 @@
 package com.streak.support.monet;
 
 import com.streak.support.monet.ColorScheme;
-import android.app.WallpaperManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import androidx.palette.graphics.Palette;
-import androidx.core.graphics.ColorUtils;
 import android.content.Context;
-import android.app.WallpaperManager;
 import android.app.ActivityThread;
 import android.annotation.NonNull;
 
 public class colorgiber {
 
     int defaultColor = 0x000000;
-
-    private WallpaperManager wallpaperManager;
-    private Drawable wallpaperDrawable;
-    private Bitmap bitmap;
-    private Palette p;
     private ColorScheme colorscheme;
 
-    public colorgiber(@NonNull Context context) {
-        wallpaperManager = WallpaperManager.getInstance(context);
-        wallpaperDrawable = wallpaperManager.getDrawable();
-        bitmap = ((BitmapDrawable)wallpaperDrawable).getBitmap();
-        p = Palette.from(bitmap).generate();
-        colorscheme = new ColorScheme(p.getDominantColor(defaultColor), false);
+    public colorgiber(@NonNull Context context, @NonNull int color) {
+        colorscheme = new ColorScheme(color, false);
     }
 
     public int noSysPriviledgeMoment(int whichp, int whichc){
         int k = colorscheme.getColor(whichp, whichc);
         return k;
-    }
-
-    public Drawable noContextWallMoment(){
-        return wallpaperDrawable;
     }
 
     public int darkDedeBhayPlz(int color, int whichp, int whichc){
@@ -69,5 +49,4 @@ public class colorgiber {
                 Math.min(g,255),
                 Math.min(b,255));
     }
-
 }
