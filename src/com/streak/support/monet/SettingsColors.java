@@ -16,96 +16,32 @@
 
 package com.streak.support.monet;
 
-import com.streak.support.monet.ColorScheme;
-import android.app.WallpaperManager;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import androidx.palette.graphics.Palette;
-import androidx.core.graphics.ColorUtils;
-import android.content.Context;
-import android.app.WallpaperManager;
-import android.app.ActivityThread;
-import android.app.UiModeManager;
-import android.os.PowerManager;
-import android.os.UserHandle;
-import android.provider.Settings;
-import android.graphics.Color;
-import android.annotation.NonNull;
-
 public class SettingsColors {
 
-    int defaultColor = 0x000000;
-    final Context bruh = ActivityThread.currentApplication();
-    boolean useMonet = true;
-    private WallpaperManager wallpaperManager;
-    private Drawable wallpaperDrawable;
-    private Bitmap bitmap;
-    private Palette p;
-    private ColorScheme colorscheme;
+    ColorScheme colorscheme;
 
-
-    public SettingsColors(@NonNull Context context) {
-        wallpaperManager = WallpaperManager.getInstance(context);
-        wallpaperDrawable = wallpaperManager.getDrawable();
-        bitmap = ((BitmapDrawable)wallpaperDrawable).getBitmap();
-        p = Palette.from(bitmap).generate();
-        colorscheme = new ColorScheme(p.getDominantColor(defaultColor), false);
+    public SettingsColors(int color) {
+        colorscheme = new ColorScheme(color, false);
     }
 
-    public int mainBG(Context context){
-        int k = isDarkM(context) ? Color.BLACK : Color.WHITE;
-        if(useMonet){
-            k = isDarkM(context) ? colorscheme.getColor(5, 10) : colorscheme.getColor(5, 1);
-        }
-        return k;
+    public int mainBG(){
+        return colorscheme.getColor(4, 1);
     }
 
-    public int accentCol(Context context){
-        int k = colorscheme.getColor(1, 5);
-        return k;
+    public int secBG(){
+        return colorscheme.getColor(4, 3);
     }
 
-    public int secBG(Context context){
-        int k = isDarkM(context) ? Color.parseColor("#161616") : Color.parseColor("#f2f2f2");
-        if(useMonet){
-            k = isDarkM(context) ? colorscheme.getColor(4, 9) : colorscheme.getColor(5, 0);
-        }
-        return k;
+    public int accentCol(){
+        return colorscheme.getColor(1, 7);
     }
 
-    public int iconCol(Context context){
-        int k = isDarkM(context) ? colorscheme.getColor(3, 6) : colorscheme.getColor(1, 7);
-        return k;
+    public int secAccentCol(){
+        return colorscheme.getColor(2, 7);
     }
 
-    public int iconBGCol(Context context){
-        int k = isDarkM(context) ? Color.WHITE : Color.BLACK;
-        if (useMonet){
-            k = isDarkM(context) ? colorscheme.getColor(5, 0) : colorscheme.getColor(1, 7);
-        }
-        return k;
+    public int tertAccentCol(){
+        return colorscheme.getColor(3, 7);
     }
 
-    public boolean isDarkM(Context context){
-        UiModeManager mUiModeManager = context.getSystemService(UiModeManager.class);
-        if (mUiModeManager.getNightMode() != UiModeManager.MODE_NIGHT_NO || isPowerSave(context)){
-            // dark
-            return true;
-        } else{
-            // light
-            return false;
-        }
-    }
-
-    public boolean isPowerSave(Context context){
-        PowerManager mPowerManager = context.getSystemService(PowerManager.class);
-        if(mPowerManager.isPowerSaveMode()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 }
