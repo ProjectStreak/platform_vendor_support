@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 crDroid Android Project
+ * Copyright (C) 2018 Android Ice Cold Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,29 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.margaritov.preference.colorpicker;
+
+package com.streak.support.preferences;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.provider.Settings;
 
-import com.streak.support.preferences.SystemSettingsStore;
+public class SystemSettingColorBlendPreference extends ColorBlendPreference {
 
-public class SystemSettingColorPickerPreference extends ColorPickerPreference {
-
-    public SystemSettingColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
+    public SystemSettingColorBlendPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public SystemSettingColorPickerPreference(Context context, AttributeSet attrs) {
+    public SystemSettingColorBlendPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public SystemSettingColorPickerPreference(Context context) {
-        super(context, null);
+    public SystemSettingColorBlendPreference(Context context) {
+        super(context);
         setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 }

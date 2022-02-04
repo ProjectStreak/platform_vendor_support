@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2010 Daniel Nilsson
  * Copyright (C) 2013 Slimroms
+ * Copyright (C) 2020 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +16,13 @@
  * limitations under the License.
  */
 
-package net.margaritov.preference.colorpicker;
+package com.streak.support.colorpicker;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import android.os.VibrationEffect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -31,6 +32,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.streak.support.R;
+import androidx.annotation.NonNull;
+
+import com.streak.support.util.VibrationUtils;
 
 public class ColorPickerDialog extends AlertDialog implements ColorPickerView.OnColorChangedListener, View.OnClickListener, View.OnKeyListener {
 
@@ -41,13 +45,18 @@ public class ColorPickerDialog extends AlertDialog implements ColorPickerView.On
 
     private OnColorChangedListener mListener;
 
+    private final Context mContext;
+
     public interface OnColorChangedListener {
         void onColorChanged(int color);
     }
 
-    ColorPickerDialog(Context context, int initialColor) {
+    public ColorPickerDialog(Context context, int initialColor) {
         super(context);
+
         init(initialColor);
+
+        mContext = context;
     }
 
     private void init(int color) {
@@ -73,7 +82,7 @@ public class ColorPickerDialog extends AlertDialog implements ColorPickerView.On
                 Context.LAYOUT_INFLATER_SERVICE);
 
         assert inflater != null;
-        View layout = inflater.inflate(R.layout.dui_dialog_color_picker, null);
+        View layout = inflater.inflate(R.layout.preference_color_picker, null);
 
         mColorPicker = layout.findViewById(R.id.color_picker_view);
         mOldColor = layout.findViewById(R.id.old_color_panel);
@@ -119,7 +128,7 @@ public class ColorPickerDialog extends AlertDialog implements ColorPickerView.On
      *
      * @param listener
      */
-    void setOnColorChangedListener(OnColorChangedListener listener) {
+    public void setOnColorChangedListener(OnColorChangedListener listener) {
         mListener = listener;
     }
 
@@ -144,6 +153,7 @@ public class ColorPickerDialog extends AlertDialog implements ColorPickerView.On
                 mListener.onColorChanged(mNewColor.getColor());
             }
         }
+        VibrationUtils.doHapticFeedback(mContext, VibrationEffect.EFFECT_CLICK);
         dismiss();
     }
 
