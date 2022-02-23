@@ -6,7 +6,10 @@ android_library {
         enabled: false,
     },
 
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt"
+    ],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
@@ -19,7 +22,11 @@ android_library {
         "androidx.viewpager_viewpager"
     ],
 
-    resource_dirs: ["res"],
+    resource_dirs: [
+        "res",
+        "res-orig",
+        "res-qr"
+    ],
 
     min_sdk_version: "21",
 }
