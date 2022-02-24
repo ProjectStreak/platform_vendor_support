@@ -22,7 +22,8 @@ android_library {
         "androidx.viewpager_viewpager",
         "androidx.palette_palette",
         "kotlinx-coroutines-android",
-        "kotlinx-coroutines-core"
+        "kotlinx-coroutines-core",
+        "zxing-core-1.7"
     ],
 
     resource_dirs: [
