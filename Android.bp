@@ -19,7 +19,8 @@ android_library {
         "androidx.preference_preference",
         "androidx.appcompat_appcompat",
         "androidx.recyclerview_recyclerview",
-        "androidx.viewpager_viewpager"
+        "androidx.viewpager_viewpager",
+        "zxing-core-1.7"
     ],
 
     resource_dirs: [
